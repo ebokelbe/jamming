@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-//import searchbar
+import SearchBar from '../SearchBar/SearchBar'
 //import searchresults
 //import playlist
 
