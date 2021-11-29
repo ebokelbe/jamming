@@ -4,7 +4,7 @@ import Track from "../Track/Track";
 
 export class TrackList extends React.Component{
     render(){
-        const trackLis = this.props.tracks.map(track => <Track key={track.id}>
+        const trackLis = this.props.tracks.map(track => <Track key={track.id} onAdd={this.props.onAdd} onRemove={this.props.onRemove} isRemoval={this.props.isRemoval}>
             <h3>{this.props.track.name}</h3>
             <p>{this.props.track.artist}|{this.props.track.album}</p>
         </Track>);
