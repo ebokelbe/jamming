@@ -23,7 +23,25 @@ export const Spotify = {
             window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + clientId + '&response_type=token&scope=playlist-modify-public&redirect_uri=' + redirectURI;
         }
 
-        //
 
+    },
+
+    search(searchTerm){
+        // return a promise that resolves to a list of tracks from the search
+        const term = 'https://api.spotify.com/v1/search?type=track&q=' + searchTerm;
+        const spotifyResponse = fetch(term, {headers: {Authorization: `Bearer ${accessToken}`}})
+                        .then(response => response.json())
+                        .then(jsonResponse =>{
+                            if(!jsonResponse.tracks){
+                                return []; // return empty array if JSON response contains no tracks.
+                            }
+                            return jsonResponse.tracks.items.map(track => ({
+                                id: track.id,
+                                name: track.name,
+                                artist: track.artists[0].name,
+                                album: track.album.name,
+                                uri: track.uri
+                            }));
+                        });
     }
 }
